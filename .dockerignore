@@ -1,0 +1,10 @@
+**/node_modules
+sqlpath-backend/dist
+sqlpath-frontend/.next
+sqlpath-frontend/out
+**/.env
+**/.env.local
+**/.env.*.local
+.git
+.DS_Store
+**/*.log

@@ -1,0 +1,16 @@
+{
+  "name": "sqlpath",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SQLPath monorepo — sqlpath-backend (NestJS API) + sqlpath-frontend (Next.js). See README.md.",
+  "scripts": {
+    "install:all": "npm install --prefix sqlpath-backend && npm install --prefix sqlpath-frontend",
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run start:dev --prefix sqlpath-backend\" \"npm run dev --prefix sqlpath-frontend\"",
+    "build": "npm run build --prefix sqlpath-backend && npm run build --prefix sqlpath-frontend",
+    "docker:build": "docker build -t sqlpath .",
+    "docker:run": "docker run --rm -p 3000:3000 --env-file sqlpath-backend/.env sqlpath"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  }
+}

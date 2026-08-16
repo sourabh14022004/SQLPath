@@ -1,0 +1,26 @@
+# Root .gitignore for the SQLPath monorepo (sqlpath-backend/ + sqlpath-frontend/).
+# Each subfolder also has its own .gitignore; this one is the backstop once
+# both live under a single repo.
+
+# dependencies
+**/node_modules/
+
+# backend build output
+sqlpath-backend/dist/
+
+# frontend build output
+sqlpath-frontend/.next/
+sqlpath-frontend/out/
+sqlpath-frontend/next-env.d.ts
+
+# env files — never commit real secrets
+**/.env
+**/.env.local
+**/.env.*.local
+!**/.env.example
+
+# misc
+.DS_Store
+*.log
+*.pem
+*.tsbuildinfo

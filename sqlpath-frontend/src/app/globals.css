@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #e86b32;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #ffdbcd;
+  --color-on-primary-container: #351000;
+
+  --color-secondary: #765749;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #ffdbcd;
+  --color-on-secondary-container: #2c150b;
+
+  --color-tertiary: #656031;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #ebe5ab;
+  --color-on-tertiary-container: #1f1c00;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #410002;
+
+  --color-background: #fff8f3;
+  --color-on-background: #221a15;
+  --color-surface: #fff8f3;
+  --color-on-surface: #221a15;
+  --color-surface-variant: #f4dfd6;
+  --color-on-surface-variant: #52443d;
+
+  --color-outline: #85736b;
+  --color-outline-variant: #d7c2ba;
+
+  --color-surface-dim: #e8d6ce;
+  --color-surface-bright: #fff8f3;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #fff1e9;
+  --color-surface-container: #fceae2;
+  --color-surface-container-high: #f6e4dc;
+  --color-surface-container-highest: #f0ded6;
+
+  --font-sans: var(--font-hanken), "Hanken Grotesk", sans-serif;
+  --font-code: var(--font-jetbrains), "JetBrains Mono", monospace;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--font-weight: 500;
+
+  --text-label-md: 13px;
+  --text-label-md--line-height: 18px;
+  --text-label-md--font-weight: 500;
+
+  --text-body-md: 14px;
+  --text-body-md--line-height: 20px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--font-weight: 400;
+
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-lg: 24px;
+  --text-headline-lg--line-height: 32px;
+  --text-headline-lg--letter-spacing: -0.015em;
+  --text-headline-lg--font-weight: 600;
+
+  --text-display: 36px;
+  --text-display--line-height: 44px;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 600;
+
+  --text-code: 13px;
+  --text-code--line-height: 20px;
+  --text-code--font-weight: 400;
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --spacing-sidebar-width: 240px;
+  --spacing-container-max: 1440px;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  vertical-align: middle;
+}
+
+.grid-bg {
+  background-image: radial-gradient(var(--color-outline-variant) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Hide scrollbars globally across all browsers while preserving scroll functionality */
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
