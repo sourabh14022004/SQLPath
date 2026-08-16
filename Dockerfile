@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends python3 make g+
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app/backend
 COPY sqlpath-backend/package*.json ./
-RUN npm ci
+RUN npm install
 COPY sqlpath-backend/ ./
 RUN npm run build
 
@@ -26,7 +26,7 @@ RUN npm run build
 FROM node:20-bookworm-slim AS frontend-build
 WORKDIR /app/frontend
 COPY sqlpath-frontend/package*.json ./
-RUN npm ci
+RUN npm install
 COPY sqlpath-frontend/ ./
 # No NEXT_PUBLIC_API_URL is set here on purpose: src/lib/api.ts defaults to
 # the relative path '/api/v1', which the rewrite below forwards to the
@@ -42,12 +42,12 @@ ENV NODE_ENV=production
 RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=backend-build /app/backend/package*.json ./backend/
-RUN cd backend && npm ci --omit=dev
+RUN cd backend && npm install --omit=dev
 COPY --from=backend-build /app/backend/dist ./backend/dist
 
 # Frontend runtime deps + build output
 COPY --from=frontend-build /app/frontend/package*.json ./frontend/
-RUN cd frontend && npm ci --omit=dev
+RUN cd frontend && npm install --omit=dev
 COPY --from=frontend-build /app/frontend/.next ./frontend/.next
 COPY --from=frontend-build /app/frontend/public ./frontend/public
 COPY --from=frontend-build /app/frontend/next.config.ts ./frontend/
