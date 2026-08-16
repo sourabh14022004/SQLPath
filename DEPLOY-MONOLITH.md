@@ -82,6 +82,22 @@ CORS at all, this only matters if something calls the backend directly.
    process crashed on boot and the container should have exited/restarted;
    look for a stack trace above the exit line.
 
+## Troubleshooting: container restart loop on boot
+
+The backend validates its required variables at startup (see
+`sqlpath-backend/src/config/env.validation.ts`). If `DATABASE_URL` or
+`JWT_SECRET` is missing, the very first log line after
+`Starting Nest application...` names the missing variable and the process
+exits — which, because `docker-entrypoint.js` shuts the container down when
+either child dies, shows up as a restart loop with the frontend appearing
+to start fine. Set the variable in Settings → Variables and redeploy.
+
+`JWT_SECRET` must be at least 32 characters; generate one with:
+
+```
+openssl rand -base64 48
+```
+
 ## Database note
 
 Same caveat as the two-service setup: if your Supabase project's schema and
