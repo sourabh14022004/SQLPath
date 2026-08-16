@@ -49,7 +49,7 @@ setTimeout(() => {
   console.log(`Starting frontend on public port ${FRONTEND_PORT}...`);
   run('frontend', 'node_modules/.bin/next', ['start', '-p', FRONTEND_PORT], 'frontend', {
     PORT: FRONTEND_PORT,
-    BACKEND_INTERNAL_URL: `http://localhost:${BACKEND_PORT}`,
+    BACKEND_INTERNAL_URL: `http://127.0.0.1:${BACKEND_PORT}`,
   });
 }, 2000);
 
