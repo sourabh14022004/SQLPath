@@ -12,7 +12,7 @@ import { fadeUp, staggerContainer } from '@/lib/motion';
 const DEMO_LOGINS = [
   { label: 'Active Student', email: 'active_student@demo.com' },
   { label: 'At-risk Student', email: 'atrisk_student@demo.com' },
-  { label: 'Faculty / Mentor', email: 'faculty@demo.com' },
+  { label: 'Admin', email: 'admin@demo.com' },
 ];
 
 export default function LoginPage() {

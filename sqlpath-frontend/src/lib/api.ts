@@ -106,4 +106,32 @@ export const api = {
       method: 'PATCH',
       body: JSON.stringify({ leetcodeUsername }),
     }, token),
+
+  getPlatformUsernames: (token: string) =>
+    request<{ leetcode: string | null; leetcodeVerified: boolean; codeforces: string | null; geeksforgeeks: string | null; hackerrank: string | null }>(
+      '/profiles/usernames', {}, token,
+    ),
+
+  saveCodeforcesUsername: (token: string, codeforcesUsername: string | null) =>
+    request<any>('/profiles/codeforces', {
+      method: 'PATCH',
+      body: JSON.stringify({ codeforcesUsername }),
+    }, token),
+
+  saveGeeksforgeeksUsername: (token: string, geeksforgeeksUsername: string | null) =>
+    request<any>('/profiles/geeksforgeeks', {
+      method: 'PATCH',
+      body: JSON.stringify({ geeksforgeeksUsername }),
+    }, token),
+
+  saveHackerrankUsername: (token: string, hackerrankUsername: string | null) =>
+    request<any>('/profiles/hackerrank', {
+      method: 'PATCH',
+      body: JSON.stringify({ hackerrankUsername }),
+    }, token),
+
+  getProfileStats: (token: string) =>
+    request<{ leetcode: any | null; codeforces: any | null; geeksforgeeks: any | null; hackerrank: any | null }>(
+      '/profiles/stats', {}, token,
+    ),
 };

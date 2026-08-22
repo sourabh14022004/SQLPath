@@ -10,8 +10,16 @@ export function difficultyBadge(difficulty: string) {
 // backwards-compat alias
 export const difficultyBg = difficultyBadge;
 
-export function platformBadge(_platform: string) {
-  return 'bg-primary/10 text-primary border border-primary/20';
+export function platformBadge(platform: string) {
+  switch (platform) {
+    case 'leetcode':     return 'bg-yellow-500/10 text-yellow-700 border border-yellow-500/25 dark:text-yellow-400';
+    case 'hackerrank':   return 'bg-green-500/10 text-green-700 border border-green-500/25 dark:text-green-400';
+    case 'datalemur':    return 'bg-purple-500/10 text-purple-700 border border-purple-500/25 dark:text-purple-400';
+    case 'stratascratch':return 'bg-blue-500/10 text-blue-700 border border-blue-500/25 dark:text-blue-400';
+    case 'sqlzoo':       return 'bg-cyan-500/10 text-cyan-700 border border-cyan-500/25 dark:text-cyan-400';
+    case 'geeksforgeeks':return 'bg-emerald-500/10 text-emerald-700 border border-emerald-500/25 dark:text-emerald-400';
+    default:             return 'bg-primary/10 text-primary border border-primary/20';
+  }
 }
 
 export const platformColor = platformBadge;

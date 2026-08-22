@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
-import Navbar from '@/components/Navbar';
+import StudentLayout from '@/components/StudentLayout';
 import Skeleton from '@/components/Skeleton';
 import CountUp from '@/components/CountUp';
 import { formatPoints, initials } from '@/lib/utils';
@@ -45,9 +45,8 @@ export default function LeaderboardPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="pt-24 pb-12 px-4 md:px-6 max-w-[1440px] mx-auto">
+    <StudentLayout>
+      <main className="pb-12 px-4 md:px-6 py-8 max-w-[1440px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -186,6 +185,6 @@ export default function LeaderboardPage() {
           </div>
         )}
       </main>
-    </div>
+    </StudentLayout>
   );
 }

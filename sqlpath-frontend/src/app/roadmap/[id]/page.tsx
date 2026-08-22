@@ -5,7 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
 import { api } from '@/lib/api';
-import Navbar from '@/components/Navbar';
+import StudentLayout from '@/components/StudentLayout';
 import Icon from '@/components/Icon';
 import Loader, { FullPageLoader } from '@/components/Loader';
 import CountUp from '@/components/CountUp';
@@ -41,7 +41,7 @@ export default function QuestionPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!sqlCode.trim()) { setError('SQL code is required'); return; }
+    if (!isLeetCode && !sqlCode.trim()) { setError('SQL code is required'); return; }
     if (!isLeetCode && !screenshot) { setError('Screenshot is required for non-LeetCode questions'); return; }
 
     setError('');
@@ -59,20 +59,18 @@ export default function QuestionPage() {
   if (loading) return <FullPageLoader />;
 
   if (loadError) return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <div className="pt-24 max-w-2xl mx-auto px-4">
+    <StudentLayout>
+      <div className="max-w-2xl mx-auto px-4 py-8">
         <div className="bg-error-container/60 border border-error/30 text-on-error-container rounded-lg px-4 py-3">{loadError}</div>
       </div>
-    </div>
+    </StudentLayout>
   );
 
   if (!question) return <div className="p-8 text-on-surface-variant">Question not found.</div>;
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <main className="pt-24 pb-12 px-4 md:px-6 max-w-3xl mx-auto space-y-6">
+    <StudentLayout>
+      <main className="pb-12 px-4 md:px-6 py-8 max-w-3xl mx-auto space-y-6">
 
         <motion.button
           onClick={() => router.push('/roadmap')}
@@ -148,16 +146,18 @@ export default function QuestionPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-label-md text-on-surface">Your SQL code *</label>
-                  <textarea
-                    value={sqlCode}
-                    onChange={e => setSqlCode(e.target.value)}
-                    rows={8}
-                    className="w-full bg-[#1e1e1e] text-[#ddc676] font-code text-code p-4 rounded border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y outline-none"
-                    placeholder="Paste your solution here..."
-                  />
-                </div>
+                {!isLeetCode && (
+                  <div className="space-y-2">
+                    <label className="text-label-md text-on-surface">Your SQL code *</label>
+                    <textarea
+                      value={sqlCode}
+                      onChange={e => setSqlCode(e.target.value)}
+                      rows={8}
+                      className="w-full bg-[#1e1e1e] text-[#ddc676] font-code text-code p-4 rounded border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-y outline-none"
+                      placeholder="Paste your solution here..."
+                    />
+                  </div>
+                )}
 
                 {!isLeetCode && (
                   <div>
@@ -279,6 +279,6 @@ export default function QuestionPage() {
             </motion.div>
           )}
       </main>
-    </div>
+    </StudentLayout>
   );
 }

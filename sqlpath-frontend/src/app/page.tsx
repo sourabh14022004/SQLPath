@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     if (loading) return;
     if (!user) { router.replace('/login'); return; }
-    if (user.role === 'mentor' || user.role === 'admin') {
+    if (user.role === 'admin') {
       router.replace('/mentor');
     } else {
       router.replace('/dashboard');

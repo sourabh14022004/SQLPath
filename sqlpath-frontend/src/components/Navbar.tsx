@@ -13,6 +13,7 @@ const STUDENT_LINKS = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/roadmap', label: 'Roadmap' },
   { href: '/leaderboard', label: 'Leaderboard' },
+  { href: '/profile', label: 'Profile' },
 ];
 
 export default function Navbar() {

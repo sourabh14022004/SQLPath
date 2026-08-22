@@ -1,43 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #e86b32;
-  --color-on-primary: #ffffff;
-  --color-primary-container: #ffdbcd;
-  --color-on-primary-container: #351000;
+  --color-primary: #E3703C;
+  --color-on-primary: #FFFDF9;
+  --color-primary-container: #FFE5D3;
+  --color-on-primary-container: #261E18;
 
-  --color-secondary: #765749;
-  --color-on-secondary: #ffffff;
-  --color-secondary-container: #ffdbcd;
-  --color-on-secondary-container: #2c150b;
+  --color-secondary: #554C44;
+  --color-on-secondary: #FFFDF9;
+  --color-secondary-container: #FFE5D3;
+  --color-on-secondary-container: #261E18;
 
-  --color-tertiary: #656031;
-  --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #ebe5ab;
-  --color-on-tertiary-container: #1f1c00;
+  --color-tertiary: #EFAE90;
+  --color-on-tertiary: #261E18;
+  --color-tertiary-container: #FFE5D3;
+  --color-on-tertiary-container: #261E18;
 
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #410002;
 
-  --color-background: #fff8f3;
-  --color-on-background: #221a15;
-  --color-surface: #fff8f3;
-  --color-on-surface: #221a15;
-  --color-surface-variant: #f4dfd6;
-  --color-on-surface-variant: #52443d;
+  --color-background: #FBF6ED;
+  --color-on-background: #261E18;
+  --color-surface: #FFFBF5;
+  --color-on-surface: #261E18;
+  --color-surface-variant: #FFE5D3;
+  --color-on-surface-variant: #554C44;
 
-  --color-outline: #85736b;
-  --color-outline-variant: #d7c2ba;
+  --color-outline: #8C877F;
+  --color-outline-variant: #D0CBC3;
 
-  --color-surface-dim: #e8d6ce;
-  --color-surface-bright: #fff8f3;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #fff1e9;
-  --color-surface-container: #fceae2;
-  --color-surface-container-high: #f6e4dc;
-  --color-surface-container-highest: #f0ded6;
+  --color-surface-dim: #F5EEE2;
+  --color-surface-bright: #FFFDF9;
+  --color-surface-container-lowest: #FFFDF9;
+  --color-surface-container-low: #FFFBF5;
+  --color-surface-container: #FBF6ED;
+  --color-surface-container-high: #F5EFE4;
+  --color-surface-container-highest: #EFE8DC;
 
   --font-sans: var(--font-hanken), "Hanken Grotesk", sans-serif;
   --font-code: var(--font-jetbrains), "JetBrains Mono", monospace;
