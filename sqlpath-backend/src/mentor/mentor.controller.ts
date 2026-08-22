@@ -9,7 +9,7 @@ import { Role } from '../common/enums';
 
 @Controller('mentor')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.MENTOR, Role.ADMIN)
+@Roles(Role.ADMIN)
 export class MentorController {
   constructor(private mentorService: MentorService) {}
 

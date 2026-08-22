@@ -10,6 +10,7 @@ import { VerificationModule } from './verification/verification.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { EngagementModule } from './engagement/engagement.module';
 import { MentorModule } from './mentor/mentor.module';
+import { ProfilesModule } from './profiles/profiles.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { MentorModule } from './mentor/mentor.module';
     LeaderboardModule,
     EngagementModule,
     MentorModule,
+    ProfilesModule,
   ],
 })
 export class AppModule {}

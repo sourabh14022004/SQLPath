@@ -2,11 +2,11 @@
  * SQLPath Seed Script
  * Run: npx ts-node src/seed/seed.ts
  *
- * Seeds: 1 cohort, 1 mentor, 20 students, 30 sample questions (expand to 350 manually)
+ * Seeds: 1 cohort, 1 admin, 20 students, 30 sample questions (expand to 350 manually)
  * Demo logins:
  *   active_student@demo.com  / Demo123!
  *   atrisk_student@demo.com  / Demo123!
- *   faculty@demo.com         / Demo123!
+ *   admin@demo.com           / Demo123!
  */
 
 import 'reflect-metadata';
@@ -118,12 +118,12 @@ async function seed() {
     `);
     const cohortId = cohortResult[0].id;
 
-    // ── Mentor ──────────────────────────────────────────────────────────────
-    console.log('👨‍🏫 Creating mentor...');
+    // ── Admin ────────────────────────────────────────────────────────────────
+    console.log('👨‍💼 Creating admin...');
     const mentorHash = await bcrypt.hash('Demo123!', 12);
     const mentorResult = await runner.query(`
       INSERT INTO users (name, email, password_hash, role, cohort_id, trust_score)
-      VALUES ('Prof. Sharma', 'faculty@demo.com', $1, 'mentor', $2, 100)
+      VALUES ('Prof. Sharma', 'admin@demo.com', $1, 'admin', $2, 100)
       RETURNING id
     `, [mentorHash, cohortId]);
     const mentorId = mentorResult[0].id;

@@ -30,6 +30,15 @@ export class User {
   @Column({ name: 'leetcode_verified', default: false })
   leetcodeVerified: boolean;
 
+  @Column({ name: 'codeforces_username', nullable: true, length: 100 })
+  codeforcesUsername: string;
+
+  @Column({ name: 'geeksforgeeks_username', nullable: true, length: 100 })
+  geeksforgeeksUsername: string;
+
+  @Column({ name: 'hackerrank_username', nullable: true, length: 100 })
+  hackerrankUsername: string;
+
   @Column({ name: 'trust_score', default: 80 })
   trustScore: number;
 

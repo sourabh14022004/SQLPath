@@ -111,7 +111,7 @@ export class MentorService {
     return { message: `Solve ${decision} successfully`, queueId, decision };
   }
 
-  async getCohortRisk(mentorId: string) {
+  async getCohortRisk(_adminId: string) {
     return this.dataSource.query(
       `SELECT
          u.id, u.name, u.email, u.trust_score, u.current_streak,
@@ -131,11 +131,9 @@ export class MentorService {
        LEFT JOIN solves s ON s.student_id = u.id
        LEFT JOIN anti_gaming_flags f ON f.student_id = u.id AND f.resolved = false
        WHERE u.role = 'student'
-         AND u.cohort_id IN (SELECT id FROM cohorts WHERE mentor_id = $1)
        GROUP BY u.id, u.name, u.email, u.trust_score, u.current_streak,
                 u.longest_streak, u.last_active_date, u.engagement_status
        ORDER BY risk_level ASC, u.trust_score ASC, total_flags DESC`,
-      [mentorId],
     );
   }
 

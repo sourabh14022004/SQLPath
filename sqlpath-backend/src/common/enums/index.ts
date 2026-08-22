@@ -30,7 +30,6 @@ export enum SolveStatus {
 
 export enum Role {
   STUDENT = 'student',
-  MENTOR = 'mentor',
   ADMIN = 'admin',
 }
 

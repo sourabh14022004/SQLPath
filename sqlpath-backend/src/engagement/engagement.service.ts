@@ -14,10 +14,12 @@ export class EngagementService {
   async getMyEngagement(studentId: string) {
     const user = await this.userRepository.findOne({ where: { id: studentId } });
 
-    const [heatmap, totalScore, recentSolves] = await Promise.all([
+    const [heatmap, totalScore, recentSolves, totalSolved, phaseProgress] = await Promise.all([
       this.getHeatmap(studentId),
       this.getTotalScore(studentId),
       this.getRecentSolves(studentId),
+      this.getTotalSolved(studentId),
+      this.getPhaseProgress(studentId),
     ]);
 
     return {
@@ -27,6 +29,8 @@ export class EngagementService {
       engagementStatus: user.engagementStatus,
       trustScore: user.trustScore,
       totalScore,
+      totalSolved,
+      phaseProgress,
       heatmap,
       recentSolves,
     };
@@ -54,6 +58,34 @@ export class EngagementService {
       });
     }
     return result;
+  }
+
+  private async getTotalSolved(studentId: string): Promise<number> {
+    const r = await this.dataSource.query(
+      `SELECT COUNT(DISTINCT question_id) AS total FROM solves
+       WHERE student_id = $1 AND status IN ('auto_verified', 'mentor_verified')`,
+      [studentId],
+    );
+    return Number(r[0]?.total ?? 0);
+  }
+
+  private async getPhaseProgress(studentId: string) {
+    const rows = await this.dataSource.query(
+      `SELECT
+         q.phase,
+         COUNT(q.id) AS total,
+         COUNT(s.id) FILTER (WHERE s.status IN ('auto_verified','mentor_verified')) AS solved
+       FROM questions q
+       LEFT JOIN solves s ON s.question_id = q.id AND s.student_id = $1
+       GROUP BY q.phase
+       ORDER BY q.phase ASC`,
+      [studentId],
+    );
+    return rows.map((r: any) => ({
+      phase: Number(r.phase),
+      total: Number(r.total),
+      solved: Number(r.solved),
+    }));
   }
 
   private async getTotalScore(studentId: string) {
