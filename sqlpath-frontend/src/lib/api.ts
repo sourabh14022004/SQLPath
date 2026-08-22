@@ -134,4 +134,29 @@ export const api = {
     request<{ leetcode: any | null; codeforces: any | null; geeksforgeeks: any | null; hackerrank: any | null }>(
       '/profiles/stats', {}, token,
     ),
+
+  // Admin
+  adminGetStats: (token: string) =>
+    request<any>('/admin/stats', {}, token),
+
+  adminGetHeatmap: (token: string) =>
+    request<any[]>('/admin/questions/heatmap', {}, token),
+
+  adminGetStudents: (token: string) =>
+    request<any[]>('/admin/students', {}, token),
+
+  adminGetStudentDetail: (token: string, studentId: string) =>
+    request<any>(`/admin/student/${studentId}`, {}, token),
+
+  adminCreateQuestion: (token: string, dto: any) =>
+    request<any>('/admin/questions', { method: 'POST', body: JSON.stringify(dto) }, token),
+
+  adminUpdateQuestion: (token: string, id: string, dto: any) =>
+    request<any>(`/admin/questions/${id}`, { method: 'PATCH', body: JSON.stringify(dto) }, token),
+
+  adminDeleteQuestion: (token: string, id: string) =>
+    request<any>(`/admin/questions/${id}`, { method: 'DELETE' }, token),
+
+  adminGetStudentPlatformStats: (token: string, studentId: string) =>
+    request<any>(`/admin/student/${studentId}/platform-stats`, {}, token),
 };

@@ -11,6 +11,7 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { EngagementModule } from './engagement/engagement.module';
 import { MentorModule } from './mentor/mentor.module';
 import { ProfilesModule } from './profiles/profiles.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ProfilesModule } from './profiles/profiles.module';
     EngagementModule,
     MentorModule,
     ProfilesModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

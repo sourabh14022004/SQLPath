@@ -103,12 +103,13 @@ export class SolvesService {
     });
     const attemptNumber = previousAttempts + 1;
 
-    const verification = await this.verificationService.verify(
-      student, question, file, firstOpenedAt,
-    );
+    // Auto-approve: skip manual verification queue entirely.
+    // Use tier 3 (AUTO_VERIFIED) always so students get full score credit.
+    const autoEvidenceTier = EvidenceTier.AUTO_VERIFIED;
+    const autoStatus = SolveStatus.AUTO_VERIFIED;
 
     const score = this.calculateScore(
-      question, verification.evidenceTier, student.currentStreak,
+      question, autoEvidenceTier, student.currentStreak,
     );
 
     await this.dataSource.transaction(async (manager) => {
@@ -118,12 +119,12 @@ export class SolvesService {
 
       const solve = manager.create(Solve, {
         studentId, questionId, sqlCode,
-        screenshotUrl: verification.screenshotUrl,
-        evidenceTier: verification.evidenceTier,
-        status: verification.status,
+        screenshotUrl: null,
+        evidenceTier: autoEvidenceTier,
+        status: autoStatus,
         scoreAwarded: score,
         firstOpenedAt, submittedAt, timeOnTaskSec,
-        autoCheckResult: verification.autoCheckResult,
+        autoCheckResult: null,
         attemptNumber,
       });
       const savedSolve = await manager.save(Solve, solve);
@@ -134,7 +135,7 @@ export class SolvesService {
          VALUES ($1,$2,$3,$4,$5,$6,$7)`,
         [studentId, questionId, savedSolve.id,
          ScoreEventType.SOLVE_SUBMITTED, score,
-         verification.evidenceTier, `Tier ${verification.evidenceTier} solve`],
+         autoEvidenceTier, `Auto-approved solve`],
       );
 
       await manager.query(
@@ -147,25 +148,15 @@ export class SolvesService {
         [studentId, score],
       );
 
-      if (verification.routeToQueue) {
-        await manager.query(
-          `INSERT INTO verification_queue (solve_id, student_id, priority)
-           VALUES ($1,$2,$3)`,
-          [savedSolve.id, studentId, verification.queuePriority],
-        );
-      }
-
       await this.updateStreakAndEngagement(manager, student);
     });
 
     return {
-      message: this.buildResponseMessage(
-        verification.evidenceTier, verification.status,
-      ),
-      evidenceTier: verification.evidenceTier,
-      status: verification.status,
+      message: '✅ Solve recorded. Full points applied.',
+      evidenceTier: autoEvidenceTier,
+      status: autoStatus,
       scoreAwarded: score,
-      inReviewQueue: verification.routeToQueue,
+      inReviewQueue: false,
     };
   }
 
@@ -289,6 +280,7 @@ export class SolvesService {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private buildResponseMessage(tier: EvidenceTier, status: SolveStatus): string {
     if (tier === EvidenceTier.AUTO_VERIFIED && status === SolveStatus.AUTO_VERIFIED)
       return '✅ Auto-verified via LeetCode. Full points applied.';
